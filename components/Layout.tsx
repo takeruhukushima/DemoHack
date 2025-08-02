@@ -4,12 +4,14 @@ import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
+import { AuthProvider } from '@/contexts/AuthContext';
+import Auth from './Auth';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-export default function Layout({ children }: LayoutProps) {
+function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   
   return (
@@ -17,43 +19,42 @@ export default function Layout({ children }: LayoutProps) {
       {/* ヘッダー */}
       <header className="border-b border-border bg-card">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="text-2xl font-bold text-primary hover:opacity-80">
-                DemoHack
-              </Link>
-              <nav className="hidden md:flex space-x-1">
-                <Button
-                  asChild
-                  variant={pathname === '/' ? 'secondary' : 'ghost'}
-                >
-                  <Link href="/">
-                    記事一覧
-                  </Link>
-                </Button>
-                <Button 
-                  asChild
-                  variant={pathname === '/articles/popular' ? 'secondary' : 'ghost'}
-                >
-                  <Link href="/articles/popular">
-                    人気記事
-                  </Link>
-                </Button>
-                <Button 
-                  asChild
-                  variant={pathname === '/articles/new' ? 'secondary' : 'ghost'}
-                >
-                  <Link href="/articles/new" className="flex items-center gap-1">
-                    <span className="text-primary">✏️</span>
-                    <span>投稿する</span>
-                  </Link>
-                </Button>
-              </nav>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Button variant="outline">ログイン</Button>
-              <Button>新規登録</Button>
-            </div>
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center space-x-4">
+                <Link href="/" className="text-2xl font-bold text-primary hover:opacity-80">
+                  DemoHack
+                </Link>
+                <nav className="hidden md:flex space-x-1">
+                  <Button
+                    asChild
+                    variant={pathname === '/' ? 'secondary' : 'ghost'}
+                  >
+                    <Link href="/">
+                      記事一覧
+                    </Link>
+                  </Button>
+                  <Button 
+                    asChild
+                    variant={pathname === '/articles/popular' ? 'secondary' : 'ghost'}
+                  >
+                    <Link href="/articles/popular">
+                      人気記事
+                    </Link>
+                  </Button>
+                  <Button 
+                    asChild
+                    variant={pathname === '/articles/new' ? 'secondary' : 'ghost'}
+                  >
+                    <Link href="/articles/new" className="flex items-center gap-1">
+                      <span className="text-primary">✏️</span>
+                      <span>投稿する</span>
+                    </Link>
+                  </Button>
+                </nav>
+              </div>
+              <div className="flex items-center">
+                <Auth />
+              </div>
           </div>
         </div>
       </header>
@@ -139,5 +140,13 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function Layout({ children }: LayoutProps) {
+  return (
+    <AuthProvider>
+      <MainLayout>{children}</MainLayout>
+    </AuthProvider>
   );
 }
