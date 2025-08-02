@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
@@ -14,6 +15,7 @@ interface HomePageProps {
 }
 
 export default function HomePage({ onArticleSelect }: HomePageProps) {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('latest');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -61,12 +63,12 @@ export default function HomePage({ onArticleSelect }: HomePageProps) {
     <div className="space-y-8">
       {/* ヒーローセクション */}
       <div className="text-center space-y-4 py-12 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg">
-        <h1 className="text-4xl font-bold">DevAgoraへようこそ</h1>
+        <h1 className="text-4xl font-bold">DemoHackへようこそ</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           開発者による、開発者のための民主的な知識共有プラットフォーム
         </p>
         <div className="flex justify-center space-x-4">
-          <Button size="lg">記事を投稿する</Button>
+          <Button size="lg" onClick={() => router.push('/articles/new')}>記事を投稿する</Button>
           <Button variant="outline" size="lg">コミュニティに参加</Button>
         </div>
       </div>

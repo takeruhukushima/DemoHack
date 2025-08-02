@@ -6,7 +6,7 @@ import Layout from '@/components/Layout';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'DevAgora',
+  title: 'DemoHack',
   description: '開発者による、開発者のための議論の場',
 };
 

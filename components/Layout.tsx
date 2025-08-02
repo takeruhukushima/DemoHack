@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Link href="/" className="text-2xl font-bold text-primary hover:opacity-80">
-                DevAgora
+                DemoHack
               </Link>
               <nav className="hidden md:flex space-x-1">
                 <Button
@@ -134,7 +134,7 @@ export default function Layout({ children }: LayoutProps) {
             </div>
           </div>
           <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-            © 2024 DevAgora. All rights reserved.
+            © 2024 DemoHack. All rights reserved.
           </div>
         </div>
       </footer>
